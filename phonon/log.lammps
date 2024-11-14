@@ -83,9 +83,9 @@ Neighbor list info ...
 Per MPI rank memory allocation (min/avg/max) = 3.203 | 3.203 | 3.203 Mbytes
    Step          Temp          E_pair         E_mol          TotEng         Press     
          0   0             -31.865786      0             -31.865786      2942.9318    
-Loop time of 5.42e-07 on 1 procs for 0 steps with 4 atoms
+Loop time of 1.167e-06 on 1 procs for 0 steps with 4 atoms
 
-0.0% CPU use with 1 MPI tasks x no OpenMP threads
+85.7% CPU use with 1 MPI tasks x no OpenMP threads
 
 MPI task timing breakdown:
 Section |  min time  |  avg time  |  max time  |%varavg| %total
@@ -95,7 +95,7 @@ Neigh   | 0          | 0          | 0          |   0.0 |  0.00
 Comm    | 0          | 0          | 0          |   0.0 |  0.00
 Output  | 0          | 0          | 0          |   0.0 |  0.00
 Modify  | 0          | 0          | 0          |   0.0 |  0.00
-Other   |            | 5.42e-07   |            |       |100.00
+Other   |            | 1.167e-06  |            |       |100.00
 
 Nlocal:              4 ave           4 max           4 min
 Histogram: 1 0 0 0 0 0 0 0 0 0
@@ -141,9 +141,9 @@ WARNING: No fixes with time integration, atoms won't move (src/verlet.cpp:60)
 Per MPI rank memory allocation (min/avg/max) = 3.203 | 3.203 | 3.203 Mbytes
    Step          Temp          E_pair         E_mol          TotEng         Press     
          0   0             -31.865786      0             -31.865786      2942.9318    
-Loop time of 6.25e-07 on 1 procs for 0 steps with 4 atoms
+Loop time of 6.66e-07 on 1 procs for 0 steps with 4 atoms
 
-160.0% CPU use with 1 MPI tasks x no OpenMP threads
+150.2% CPU use with 1 MPI tasks x no OpenMP threads
 
 MPI task timing breakdown:
 Section |  min time  |  avg time  |  max time  |%varavg| %total
@@ -153,7 +153,7 @@ Neigh   | 0          | 0          | 0          |   0.0 |  0.00
 Comm    | 0          | 0          | 0          |   0.0 |  0.00
 Output  | 0          | 0          | 0          |   0.0 |  0.00
 Modify  | 0          | 0          | 0          |   0.0 |  0.00
-Other   |            | 6.25e-07   |            |       |100.00
+Other   |            | 6.66e-07   |            |       |100.00
 
 Nlocal:              4 ave           4 max           4 min
 Histogram: 1 0 0 0 0 0 0 0 0 0
@@ -199,9 +199,9 @@ WARNING: No fixes with time integration, atoms won't move (src/verlet.cpp:60)
 Per MPI rank memory allocation (min/avg/max) = 3.203 | 3.203 | 3.203 Mbytes
    Step          Temp          E_pair         E_mol          TotEng         Press     
          0   0             -31.865786      0             -31.865786      2942.9318    
-Loop time of 4.58e-07 on 1 procs for 0 steps with 4 atoms
+Loop time of 7.09e-07 on 1 procs for 0 steps with 4 atoms
 
-0.0% CPU use with 1 MPI tasks x no OpenMP threads
+141.0% CPU use with 1 MPI tasks x no OpenMP threads
 
 MPI task timing breakdown:
 Section |  min time  |  avg time  |  max time  |%varavg| %total
@@ -211,7 +211,7 @@ Neigh   | 0          | 0          | 0          |   0.0 |  0.00
 Comm    | 0          | 0          | 0          |   0.0 |  0.00
 Output  | 0          | 0          | 0          |   0.0 |  0.00
 Modify  | 0          | 0          | 0          |   0.0 |  0.00
-Other   |            | 4.58e-07   |            |       |100.00
+Other   |            | 7.09e-07   |            |       |100.00
 
 Nlocal:              4 ave           4 max           4 min
 Histogram: 1 0 0 0 0 0 0 0 0 0

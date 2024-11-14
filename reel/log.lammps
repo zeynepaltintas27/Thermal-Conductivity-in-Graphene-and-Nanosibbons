@@ -1,0 +1,128 @@
+LAMMPS (2 Aug 2023 - Update 3)
+# ---------- Initialize Simulation ---------------------
+units metal
+dimension 3
+boundary p p p
+atom_style atomic
+
+# ---------- Create Atoms ---------------------
+# Lattice for graphene: unit cell vectors a1=3*a and a2=sqrt(3)*a
+
+variable a equal 1.42
+variable z_spacing equal 120.0
+variable a1x equal 3.0*${a}
+variable a1x equal 3.0*1.42
+variable a2y equal sqrt(3)*${a}
+variable a2y equal sqrt(3)*1.42
+
+lattice custom 1.0     a1 ${a1x} 0.0 0.0     a2 0.0 ${a2y} 0.0     a3 0.0 0.0 ${z_spacing}     basis 0.0 0.0 0.0     basis 0.3333 0.0 0.0     basis 0.5 0.5 0.0     basis 0.8333 0.5 0.0
+lattice custom 1.0     a1 4.26 0.0 0.0     a2 0.0 ${a2y} 0.0     a3 0.0 0.0 ${z_spacing}     basis 0.0 0.0 0.0     basis 0.3333 0.0 0.0     basis 0.5 0.5 0.0     basis 0.8333 0.5 0.0
+lattice custom 1.0     a1 4.26 0.0 0.0     a2 0.0 2.45951214674781 0.0     a3 0.0 0.0 ${z_spacing}     basis 0.0 0.0 0.0     basis 0.3333 0.0 0.0     basis 0.5 0.5 0.0     basis 0.8333 0.5 0.0
+lattice custom 1.0     a1 4.26 0.0 0.0     a2 0.0 2.45951214674781 0.0     a3 0.0 0.0 120     basis 0.0 0.0 0.0     basis 0.3333 0.0 0.0     basis 0.5 0.5 0.0     basis 0.8333 0.5 0.0
+Lattice spacing in x,y,z = 4.26 2.4595121 120
+
+# Define a region with an extended z dimension
+region box block 0 50 0 40 0 1 units lattice  # Extend the region in the z-dimension, with units lattice
+
+create_box 1 box
+Created orthogonal box = (0 0 0) to (213 98.380486 120)
+  1 by 1 by 1 MPI processor grid
+create_atoms 1 box
+Created 8000 atoms
+  using lattice units in orthogonal box = (0 0 0) to (213 98.380486 120)
+  create_atoms CPU = 0.001 seconds
+
+mass 1 12.011  # Mass of carbon in atomic mass units (amu)
+
+# ---------- Interatomic Potential ---------------------
+pair_style tersoff
+pair_coeff * * BNC.tersoff C
+Reading tersoff potential file BNC.tersoff with DATE: 2013-03-21
+
+# ---------- Define Settings ---------------------
+compute eng all pe/atom
+compute eatoms all reduce sum c_eng
+
+# ---------- Run Minimization ---------------------
+reset_timestep 0
+fix 1 all box/relax aniso 0.0 vmax 0.001  # Use 'aniso' for 2D relaxation
+thermo 10
+thermo_style custom step pe lx ly lz press pxx pyy pzz c_eatoms
+min_style cg
+minimize 1e-25 1e-25 5000 10000
+Neighbor list info ...
+  update: every = 1 steps, delay = 0 steps, check = yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 4.1
+  ghost atom cutoff = 4.1
+  binsize = 2.05, bins = 104 48 59
+  1 neighbor lists, perpetual/occasional/extra = 1 0 0
+  (1) pair tersoff, perpetual
+      attributes: full, newton on
+      pair build: full/bin/atomonly
+      stencil: full/bin/3d
+      bin: standard
+WARNING: Energy due to 3 extra global DOFs will be included in minimizer energies
+ (src/min.cpp:228)
+Per MPI rank memory allocation (min/avg/max) = 11 | 11 | 11 Mbytes
+   Step         PotEng           Lx             Ly             Lz           Press           Pxx            Pyy            Pzz          c_eatoms   
+         0  -63731.572      213            98.380486      120            2942.9318      4423.6038      4405.1916      0             -63731.572    
+        10  -63816.327      215.13         99.360406      120            687.2305       1032.7064      1028.9852      0             -63816.327    
+        20  -63821.615      215.81779      99.68195       120           -2.5975622e-05  5.8649104e-05 -0.00013657597  0             -63821.615    
+        23  -63821.615      215.81777      99.681958      120           -1.2444841e-05 -2.7501918e-05 -9.8326057e-06  0             -63821.615    
+Loop time of 0.378195 on 1 procs for 23 steps with 8000 atoms
+
+99.8% CPU use with 1 MPI tasks x no OpenMP threads
+
+Minimization stats:
+  Stopping criterion = linesearch alpha is zero
+  Energy initial, next-to-last, final = 
+     -63731.5720942204  -63821.6148907452  -63821.6148907452
+  Force two-norm initial, final = 9798.2125 4.6461156e-05
+  Force max component initial, final = 6942.8164 4.3735091e-05
+  Final line search alpha, max atom move = 0.5 2.1867546e-05
+  Iterations, force evaluations = 23 57
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0.35854    | 0.35854    | 0.35854    |   0.0 | 94.80
+Neigh   | 0.0036595  | 0.0036595  | 0.0036595  |   0.0 |  0.97
+Comm    | 0.0015054  | 0.0015054  | 0.0015054  |   0.0 |  0.40
+Output  | 0.00016308 | 0.00016308 | 0.00016308 |   0.0 |  0.04
+Modify  | 0          | 0          | 0          |   0.0 |  0.00
+Other   |            | 0.01433    |            |       |  3.79
+
+Nlocal:           8000 ave        8000 max        8000 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+Nghost:          10010 ave       10010 max       10010 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+Neighs:              0 ave           0 max           0 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+FullNghs:       144000 ave      144000 max      144000 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+
+Total # of neighbors = 144000
+Ave neighs/atom = 18
+Neighbor list builds = 2
+Dangerous builds = 0
+
+variable natoms equal "count(all)"
+variable teng equal "c_eatoms"
+variable length equal "lx"
+variable ecoh equal "v_teng/v_natoms"
+
+print "Total energy (eV) = ${teng};"
+Total energy (eV) = -63821.6148907113;
+print "Number of atoms = ${natoms};"
+Number of atoms = 8000;
+print "Lattice constant (Angstroms) = ${length};"
+Lattice constant (Angstroms) = 215.817768962249;
+print "Cohesive energy (eV) = ${ecoh};"
+Cohesive energy (eV) = -7.97770186133891;
+
+print "All done!"
+All done!
+
+#lmp_serial < in.graphene.reel > output_graphene_reel.txt
+Total wall time: 0:00:00

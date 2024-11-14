@@ -1,8 +1,0 @@
-ATOM_NAME:
-  - C
-DIM: 3 3 1        # Supercell dimensions along x, y, z
-PRIMITIVE_AXIS: 
-  - 1.0 0.0 0.0
-  - 0.5 0.5 0.0
-  - 0.0 0.0 1.0
-

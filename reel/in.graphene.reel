@@ -56,3 +56,5 @@ print "Lattice constant (Angstroms) = ${length};"
 print "Cohesive energy (eV) = ${ecoh};"
 
 print "All done!"
+
+#lmp_serial < in.graphene.reel > output_graphene_reel.txt
