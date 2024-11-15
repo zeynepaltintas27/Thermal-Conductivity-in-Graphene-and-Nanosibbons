@@ -20,7 +20,7 @@ lattice custom 1.0 &
     basis 0.8333 0.5 0.0
 
 # Define a larger region with an extended z dimension
-region graphene_box block 0 1 0 1 0 1 units lattice
+region graphene_box block 0 40 0 50 0 1 units lattice
 
 create_box 1 graphene_box
 create_atoms 1 region graphene_box
@@ -34,6 +34,8 @@ pair_coeff * * BNC.tersoff C
 # ---------- Define Settings ---------------------
 compute eng all pe/atom 
 compute eatoms all reduce sum c_eng
+
+write_data graphene.data
 
 # ---------- Displace Atoms and Calculate Forces ---------------------
 # Loop through displacements
@@ -56,15 +58,18 @@ variable i loop 3  # Loop for x, y, z directions
     displace_atoms all move ${dx} ${dy} ${dz}
 
     # Output forces after each displacement for phonon calculations
+    # dump 1 all custom 100 graphene_output.lammpstrj id type x y z
     dump dump_force all custom 1 graphene_forces_${i}.lammpstrj id type x y z fx fy fz
+
+
     run 0  # Only compute forces without moving atoms
 
+    
     undump dump_force  # Clear previous dump to prepare for next loop
 
 next i
 jump SELF loop  # Return to loop
 
-phonopy --lammps -d --dim="3 3 1" -c POSCAR
 
 
 # ---------- Run Minimization ---------------------
@@ -87,4 +92,15 @@ print "Cohesive energy (eV) = ${ecoh};"
 
 print "All done!"
 
+
+
 #lmp_serial < in.graphene.phonon > output_graphene_phonon.txt
+#lmp_mpi < in.graphene.phonon > output_graphene_phonon.txt
+
+# Run Terminal
+
+# phonopy --lammps -d --dim="3 3 1" -c graphene.data
+# mpirun -np 4 lmp_mpi -in in.graphene.phonon > output_graphene_phonon.txt
+# phonopy -f graphene_forces_*.lammpstrj
+# phonopy --dim="3 3 1" -d --amplitude=0.01
+# phonopy --dim="3 3 1" -f graphene_forces_*.lammpstrj # for making FORCE_SETS 

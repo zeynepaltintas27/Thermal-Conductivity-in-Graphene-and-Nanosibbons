@@ -1,0 +1,26 @@
+LAMMPS data file via write_data, version 2 Aug 2023, timestep = 0, units = metal
+
+4 atoms
+1 atom types
+
+0 4.26 xlo xhi
+0 2.45951214674781 ylo yhi
+0 120 zlo zhi
+
+Masses
+
+1 12.011
+
+Atoms # atomic
+
+1 1 0 0 0 0 0 0
+2 1 1.4198579999999998 0 0 0 0 0
+3 1 2.13 1.229756073373905 0 0 0 0
+4 1 3.549858 1.229756073373905 0 0 0 0
+
+Velocities
+
+1 0 0 0
+2 0 0 0
+3 0 0 0
+4 0 0 0
