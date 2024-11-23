@@ -7,6 +7,7 @@ LAMMPS data file via write_data, version 2 Aug 2023, timestep = 0, units = metal
 0 2.45951214674781 ylo yhi
 0 120 zlo zhi
 
+0 0 0 xy xz yz 
 Masses
 
 1 12.011

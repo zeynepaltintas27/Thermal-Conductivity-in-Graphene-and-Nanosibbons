@@ -1,11 +1,13 @@
 phonopy:
   version: "2.29.1"
+  calculator: lammps
   frequency_unit_conversion_factor: 15.633302
   symmetry_tolerance: 1.00000e-05
   configuration:
-    displacement_distance: "0.01"
+    cell_filename: "graphene.data"
     create_displacements: ".true."
     dim: "3 3 1"
+    calculator: "lammps"
 
 physical_unit:
   atomic_mass: "AMU"
@@ -27,18 +29,18 @@ primitive_cell:
   - [     0.000000000000000,     2.459512146747810,     0.000000000000000 ] # b
   - [     0.000000000000000,     0.000000000000000,   120.000000000000000 ] # c
   points:
-  - symbol: C # 1
+  - symbol: H # 1
     coordinates: [  0.000000000000000,  0.000000000000000,  0.000000000000000 ]
-    mass: 12.010700
-  - symbol: C # 2
+    mass: 1.007940
+  - symbol: H # 2
     coordinates: [  0.333300000000000,  0.000000000000000,  0.000000000000000 ]
-    mass: 12.010700
-  - symbol: C # 3
+    mass: 1.007940
+  - symbol: H # 3
     coordinates: [  0.500000000000000,  0.500000000000000,  0.000000000000000 ]
-    mass: 12.010700
-  - symbol: C # 4
+    mass: 1.007940
+  - symbol: H # 4
     coordinates: [  0.833300000000000,  0.500000000000000,  0.000000000000000 ]
-    mass: 12.010700
+    mass: 1.007940
   reciprocal_lattice: # without 2pi
   - [     0.234741784037559,     0.000000000000000,     0.000000000000000 ] # a*
   - [     0.000000000000000,     0.406584696612412,     0.000000000000000 ] # b*
@@ -50,21 +52,21 @@ unit_cell:
   - [     0.000000000000000,     2.459512146747810,     0.000000000000000 ] # b
   - [     0.000000000000000,     0.000000000000000,   120.000000000000000 ] # c
   points:
-  - symbol: C # 1
+  - symbol: H # 1
     coordinates: [  0.000000000000000,  0.000000000000000,  0.000000000000000 ]
-    mass: 12.010700
+    mass: 1.007940
     reduced_to: 1
-  - symbol: C # 2
+  - symbol: H # 2
     coordinates: [  0.333300000000000,  0.000000000000000,  0.000000000000000 ]
-    mass: 12.010700
+    mass: 1.007940
     reduced_to: 2
-  - symbol: C # 3
+  - symbol: H # 3
     coordinates: [  0.500000000000000,  0.500000000000000,  0.000000000000000 ]
-    mass: 12.010700
+    mass: 1.007940
     reduced_to: 3
-  - symbol: C # 4
+  - symbol: H # 4
     coordinates: [  0.833300000000000,  0.500000000000000,  0.000000000000000 ]
-    mass: 12.010700
+    mass: 1.007940
     reduced_to: 4
 
 supercell:
@@ -73,149 +75,149 @@ supercell:
   - [     0.000000000000000,     7.378536440243430,     0.000000000000000 ] # b
   - [     0.000000000000000,     0.000000000000000,   120.000000000000000 ] # c
   points:
-  - symbol: C # 1
+  - symbol: H # 1
     coordinates: [  0.000000000000000,  0.000000000000000,  0.000000000000000 ]
-    mass: 12.010700
+    mass: 1.007940
     reduced_to: 1
-  - symbol: C # 2
+  - symbol: H # 2
     coordinates: [  0.333333333333333,  0.000000000000000,  0.000000000000000 ]
-    mass: 12.010700
+    mass: 1.007940
     reduced_to: 1
-  - symbol: C # 3
+  - symbol: H # 3
     coordinates: [  0.666666666666667,  0.000000000000000,  0.000000000000000 ]
-    mass: 12.010700
+    mass: 1.007940
     reduced_to: 1
-  - symbol: C # 4
+  - symbol: H # 4
     coordinates: [  0.000000000000000,  0.333333333333333,  0.000000000000000 ]
-    mass: 12.010700
+    mass: 1.007940
     reduced_to: 1
-  - symbol: C # 5
+  - symbol: H # 5
     coordinates: [  0.333333333333333,  0.333333333333333,  0.000000000000000 ]
-    mass: 12.010700
+    mass: 1.007940
     reduced_to: 1
-  - symbol: C # 6
+  - symbol: H # 6
     coordinates: [  0.666666666666667,  0.333333333333333,  0.000000000000000 ]
-    mass: 12.010700
+    mass: 1.007940
     reduced_to: 1
-  - symbol: C # 7
+  - symbol: H # 7
     coordinates: [  0.000000000000000,  0.666666666666667,  0.000000000000000 ]
-    mass: 12.010700
+    mass: 1.007940
     reduced_to: 1
-  - symbol: C # 8
+  - symbol: H # 8
     coordinates: [  0.333333333333333,  0.666666666666667,  0.000000000000000 ]
-    mass: 12.010700
+    mass: 1.007940
     reduced_to: 1
-  - symbol: C # 9
+  - symbol: H # 9
     coordinates: [  0.666666666666667,  0.666666666666667,  0.000000000000000 ]
-    mass: 12.010700
+    mass: 1.007940
     reduced_to: 1
-  - symbol: C # 10
+  - symbol: H # 10
     coordinates: [  0.111100000000000,  0.000000000000000,  0.000000000000000 ]
-    mass: 12.010700
+    mass: 1.007940
     reduced_to: 10
-  - symbol: C # 11
+  - symbol: H # 11
     coordinates: [  0.444433333333333,  0.000000000000000,  0.000000000000000 ]
-    mass: 12.010700
+    mass: 1.007940
     reduced_to: 10
-  - symbol: C # 12
+  - symbol: H # 12
     coordinates: [  0.777766666666667,  0.000000000000000,  0.000000000000000 ]
-    mass: 12.010700
+    mass: 1.007940
     reduced_to: 10
-  - symbol: C # 13
+  - symbol: H # 13
     coordinates: [  0.111100000000000,  0.333333333333333,  0.000000000000000 ]
-    mass: 12.010700
+    mass: 1.007940
     reduced_to: 10
-  - symbol: C # 14
+  - symbol: H # 14
     coordinates: [  0.444433333333333,  0.333333333333333,  0.000000000000000 ]
-    mass: 12.010700
+    mass: 1.007940
     reduced_to: 10
-  - symbol: C # 15
+  - symbol: H # 15
     coordinates: [  0.777766666666667,  0.333333333333333,  0.000000000000000 ]
-    mass: 12.010700
+    mass: 1.007940
     reduced_to: 10
-  - symbol: C # 16
+  - symbol: H # 16
     coordinates: [  0.111100000000000,  0.666666666666667,  0.000000000000000 ]
-    mass: 12.010700
+    mass: 1.007940
     reduced_to: 10
-  - symbol: C # 17
+  - symbol: H # 17
     coordinates: [  0.444433333333333,  0.666666666666667,  0.000000000000000 ]
-    mass: 12.010700
+    mass: 1.007940
     reduced_to: 10
-  - symbol: C # 18
+  - symbol: H # 18
     coordinates: [  0.777766666666667,  0.666666666666667,  0.000000000000000 ]
-    mass: 12.010700
+    mass: 1.007940
     reduced_to: 10
-  - symbol: C # 19
+  - symbol: H # 19
     coordinates: [  0.166666666666667,  0.166666666666667,  0.000000000000000 ]
-    mass: 12.010700
+    mass: 1.007940
     reduced_to: 19
-  - symbol: C # 20
+  - symbol: H # 20
     coordinates: [  0.500000000000000,  0.166666666666667,  0.000000000000000 ]
-    mass: 12.010700
+    mass: 1.007940
     reduced_to: 19
-  - symbol: C # 21
+  - symbol: H # 21
     coordinates: [  0.833333333333333,  0.166666666666667,  0.000000000000000 ]
-    mass: 12.010700
+    mass: 1.007940
     reduced_to: 19
-  - symbol: C # 22
+  - symbol: H # 22
     coordinates: [  0.166666666666667,  0.500000000000000,  0.000000000000000 ]
-    mass: 12.010700
+    mass: 1.007940
     reduced_to: 19
-  - symbol: C # 23
+  - symbol: H # 23
     coordinates: [  0.500000000000000,  0.500000000000000,  0.000000000000000 ]
-    mass: 12.010700
+    mass: 1.007940
     reduced_to: 19
-  - symbol: C # 24
+  - symbol: H # 24
     coordinates: [  0.833333333333333,  0.500000000000000,  0.000000000000000 ]
-    mass: 12.010700
+    mass: 1.007940
     reduced_to: 19
-  - symbol: C # 25
+  - symbol: H # 25
     coordinates: [  0.166666666666667,  0.833333333333333,  0.000000000000000 ]
-    mass: 12.010700
+    mass: 1.007940
     reduced_to: 19
-  - symbol: C # 26
+  - symbol: H # 26
     coordinates: [  0.500000000000000,  0.833333333333333,  0.000000000000000 ]
-    mass: 12.010700
+    mass: 1.007940
     reduced_to: 19
-  - symbol: C # 27
+  - symbol: H # 27
     coordinates: [  0.833333333333333,  0.833333333333333,  0.000000000000000 ]
-    mass: 12.010700
+    mass: 1.007940
     reduced_to: 19
-  - symbol: C # 28
+  - symbol: H # 28
     coordinates: [  0.277766666666667,  0.166666666666667,  0.000000000000000 ]
-    mass: 12.010700
+    mass: 1.007940
     reduced_to: 28
-  - symbol: C # 29
+  - symbol: H # 29
     coordinates: [  0.611100000000000,  0.166666666666667,  0.000000000000000 ]
-    mass: 12.010700
+    mass: 1.007940
     reduced_to: 28
-  - symbol: C # 30
+  - symbol: H # 30
     coordinates: [  0.944433333333333,  0.166666666666667,  0.000000000000000 ]
-    mass: 12.010700
+    mass: 1.007940
     reduced_to: 28
-  - symbol: C # 31
+  - symbol: H # 31
     coordinates: [  0.277766666666667,  0.500000000000000,  0.000000000000000 ]
-    mass: 12.010700
+    mass: 1.007940
     reduced_to: 28
-  - symbol: C # 32
+  - symbol: H # 32
     coordinates: [  0.611100000000000,  0.500000000000000,  0.000000000000000 ]
-    mass: 12.010700
+    mass: 1.007940
     reduced_to: 28
-  - symbol: C # 33
+  - symbol: H # 33
     coordinates: [  0.944433333333333,  0.500000000000000,  0.000000000000000 ]
-    mass: 12.010700
+    mass: 1.007940
     reduced_to: 28
-  - symbol: C # 34
+  - symbol: H # 34
     coordinates: [  0.277766666666667,  0.833333333333333,  0.000000000000000 ]
-    mass: 12.010700
+    mass: 1.007940
     reduced_to: 28
-  - symbol: C # 35
+  - symbol: H # 35
     coordinates: [  0.611100000000000,  0.833333333333333,  0.000000000000000 ]
-    mass: 12.010700
+    mass: 1.007940
     reduced_to: 28
-  - symbol: C # 36
+  - symbol: H # 36
     coordinates: [  0.944433333333333,  0.833333333333333,  0.000000000000000 ]
-    mass: 12.010700
+    mass: 1.007940
     reduced_to: 28
 
 displacements:

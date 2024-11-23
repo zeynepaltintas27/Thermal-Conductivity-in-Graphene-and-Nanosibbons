@@ -20,10 +20,12 @@ lattice custom 1.0 &
     basis 0.8333 0.5 0.0
 
 # Define a larger region with an extended z dimension
-region graphene_box block 0 40 0 50 0 1 units lattice
+region graphene_box block 0 1 0 1 0 1 units lattice
 
 create_box 1 graphene_box
 create_atoms 1 region graphene_box
+
+dump 1 all custom 100 forces_*.lammpstrj id type fx fy fz
 
 mass 1 12.011  # Mass of carbon in atomic mass units (amu)
 
@@ -36,41 +38,6 @@ compute eng all pe/atom
 compute eatoms all reduce sum c_eng
 
 write_data graphene.data
-
-# ---------- Displace Atoms and Calculate Forces ---------------------
-# Loop through displacements
-variable displace_step equal 0.01  # Displacement magnitude
-label loop
-variable i loop 3  # Loop for x, y, z directions
-
-    # Set displacements in each direction based on the loop index
-    if "${i} == 1" then "variable dx equal ${displace_step}" &
-                      "variable dy equal 0.0" &
-                      "variable dz equal 0.0"
-    if "${i} == 2" then "variable dx equal 0.0" &
-                      "variable dy equal ${displace_step}" &
-                      "variable dz equal 0.0"
-    if "${i} == 3" then "variable dx equal 0.0" &
-                      "variable dy equal 0.0" &
-                      "variable dz equal ${displace_step}"
-
-    # Displace atoms along x, y, or z based on loop index
-    displace_atoms all move ${dx} ${dy} ${dz}
-
-    # Output forces after each displacement for phonon calculations
-    # dump 1 all custom 100 graphene_output.lammpstrj id type x y z
-    dump dump_force all custom 1 graphene_forces_${i}.lammpstrj id type x y z fx fy fz
-
-
-    run 0  # Only compute forces without moving atoms
-
-    
-    undump dump_force  # Clear previous dump to prepare for next loop
-
-next i
-jump SELF loop  # Return to loop
-
-
 
 # ---------- Run Minimization ---------------------
 reset_timestep 0
@@ -92,10 +59,8 @@ print "Cohesive energy (eV) = ${ecoh};"
 
 print "All done!"
 
+#lmp_serial < in.graphene.phonopy > output_graphene_phonon.txt
 
-
-#lmp_serial < in.graphene.phonon > output_graphene_phonon.txt
-#lmp_mpi < in.graphene.phonon > output_graphene_phonon.txt
 
 # Run Terminal
 
