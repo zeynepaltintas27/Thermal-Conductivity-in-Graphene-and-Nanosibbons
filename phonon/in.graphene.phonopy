@@ -61,11 +61,9 @@ print "All done!"
 
 #lmp_serial < in.graphene.phonopy > output_graphene_phonon.txt
 
-
 # Run Terminal
 
 # phonopy --lammps -d --dim="3 3 1" -c graphene.data
-# mpirun -np 4 lmp_mpi -in in.graphene.phonon > output_graphene_phonon.txt
 # phonopy -f graphene_forces_*.lammpstrj
 # phonopy --dim="3 3 1" -d --amplitude=0.01
 # phonopy --dim="3 3 1" -f graphene_forces_*.lammpstrj # for making FORCE_SETS 
