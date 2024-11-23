@@ -6,4 +6,3 @@ atoms = read("graphene.data", format="lammps-data")
 # Write to POSCAR format
 write("POSCAR", atoms, format="vasp")
 
-#phyton3 lammps_to_poscar.py 
