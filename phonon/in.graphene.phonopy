@@ -6,7 +6,7 @@ atom_style atomic
 
 # ---------- Create Atoms ---------------------
 variable a equal 1.42
-variable z_spacing equal 120.0
+variable z_spacing equal 10.0
 variable a1x equal 3.0*${a}       
 variable a2y equal sqrt(3)*${a}   
 
@@ -65,5 +65,5 @@ print "All done!"
 
 # phonopy --lammps -d --dim="3 3 1" -c graphene.data
 # phonopy -f graphene_forces_*.lammpstrj
-# phonopy --dim="3 3 1" -d --amplitude=0.01
-# phonopy --dim="3 3 1" -f graphene_forces_*.lammpstrj # for making FORCE_SETS 
+# phonopy --dim="3 3 1" -d --amplitude=0.01 # POSCAR-001&002 occurred (?)
+# phonopy --dim="3 3 1" -f graphene_forces_*.lammpstrj  ??

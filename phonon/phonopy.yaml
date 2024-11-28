@@ -4,14 +4,17 @@ phonopy:
   frequency_unit_conversion_factor: 15.633302
   symmetry_tolerance: 1.00000e-05
   configuration:
+    atom_name: "C"
+    band: "0 0 0  0.5 0 0  0.5 0.5 0  0 0 0"
+    band_points: "101"
+    band_connection: ".TRUE."
     cell_filename: "graphene.data"
-    create_displacements: ".true."
-    dim: "3 3 1"
-    calculator: "lammps"
 
 physical_unit:
   atomic_mass: "AMU"
   length: "angstrom"
+  force: "eV/angstrom"
+  force_constants: "eV/angstrom^2"
 
 space_group:
   type: "Cmmm"
@@ -219,11 +222,3 @@ supercell:
     coordinates: [  0.944433333333333,  0.833333333333333,  0.000000000000000 ]
     mass: 1.007940
     reduced_to: 28
-
-displacements:
-- atom:    1
-  displacement:
-    [   0.0071692477189760,  0.0041391671004379,  0.0056097399991987 ]
-- atom:    1
-  displacement:
-    [  -0.0071692477189760, -0.0041391671004379, -0.0056097399991987 ]
