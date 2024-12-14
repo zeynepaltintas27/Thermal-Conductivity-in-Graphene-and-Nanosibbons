@@ -1,0 +1,72 @@
+LAMMPS (2 Aug 2023 - Update 3)
+Lattice spacing in x,y,z = 4.26 2.4595121 10
+Created orthogonal box = (0 0 0) to (12.78 73.785364 10)
+  1 by 1 by 1 MPI processor grid
+Created 360 atoms
+  using lattice units in orthogonal box = (0 0 0) to (12.78 73.785364 10)
+  create_atoms CPU = 0.000 seconds
+Reading tersoff potential file BNC.tersoff with DATE: 2013-03-21
+System init for write_data ...
+Neighbor list info ...
+  update: every = 1 steps, delay = 0 steps, check = yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 4.1
+  ghost atom cutoff = 4.1
+  binsize = 2.05, bins = 7 36 5
+  1 neighbor lists, perpetual/occasional/extra = 1 0 0
+  (1) pair tersoff, perpetual
+      attributes: full, newton on
+      pair build: full/bin/atomonly
+      stencil: full/bin/3d
+      bin: standard
+Setting up cg style minimization ...
+  Unit style    : metal
+  Current step  : 0
+Per MPI rank memory allocation (min/avg/max) = 4.389 | 4.389 | 4.389 Mbytes
+   Step          Temp          E_pair         E_mol          TotEng         Press     
+         0   0             -2850.0126      0             -2850.0126      32441.472    
+       145   0             -2857.539       0             -2857.539       20596.54     
+Loop time of 0.0751825 on 1 procs for 145 steps with 360 atoms
+
+99.4% CPU use with 1 MPI tasks x no OpenMP threads
+
+Minimization stats:
+  Stopping criterion = energy tolerance
+  Energy initial, next-to-last, final = 
+     -2850.01255915273  -2857.53897414412  -2857.53897414412
+  Force two-norm initial, final = 23.903094 2.0206844e-05
+  Force max component initial, final = 4.9515299 3.073256e-06
+  Final line search alpha, max atom move = 1 3.073256e-06
+  Iterations, force evaluations = 145 290
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0.072193   | 0.072193   | 0.072193   |   0.0 | 96.02
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0.00057921 | 0.00057921 | 0.00057921 |   0.0 |  0.77
+Output  | 0.00033158 | 0.00033158 | 0.00033158 |   0.0 |  0.44
+Modify  | 0          | 0          | 0          |   0.0 |  0.00
+Other   |            | 0.002079   |            |       |  2.77
+
+Nlocal:            360 ave         360 max         360 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+Nghost:            780 ave         780 max         780 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+Neighs:              0 ave           0 max           0 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+FullNghs:         6324 ave        6324 max        6324 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+
+Total # of neighbors = 6324
+Ave neighs/atom = 17.566667
+Neighbor list builds = 0
+Dangerous builds = 0
+Setting up Verlet run ...
+  Unit style    : metal
+  Current step  : 145
+  Time step     : 0.001
+Per MPI rank memory allocation (min/avg/max) = 4.527 | 4.527 | 4.527 Mbytes
+   Step          Temp          E_pair         E_mol          TotEng         Press     
+ERROR: Lost atoms: original 360 current 354 (src/thermo.cpp:488)
+Last command: run 500  # Let atoms relax dynamically

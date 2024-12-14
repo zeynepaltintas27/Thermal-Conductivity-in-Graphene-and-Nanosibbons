@@ -1,0 +1,74 @@
+# ---------- Initialize Simulation ---------------------
+units metal
+dimension 3                
+boundary p f p             
+atom_style atomic
+
+# ---------- Create Atoms ---------------------
+variable a equal 1.42
+variable z_spacing equal 10.0
+variable a1x equal 3.0*${a}       
+variable a2y equal sqrt(3)*${a}   
+
+lattice custom 1.0 &
+    a1 ${a1x} 0.0 0.0 &
+    a2 0.0 ${a2y} 0.0 &
+    a3 0.0 0.0 ${z_spacing} &
+    basis 0.0 0.0 0.0 &
+    basis 0.3333 0.0 0.0 &
+    basis 0.5 0.5 0.0 &
+    basis 0.8333 0.5 0.0
+
+# Define a larger region with an extended z dimension
+region nanoribbons_box block 0 3 0 30 0 1 units lattice
+
+create_box 1 nanoribbons_box
+create_atoms 1 region nanoribbons_box
+
+dump 1 all custom 100 nanoribbons_forces_*.lammpstrj id type fx fy fz
+
+mass 1 12.011  # Mass of carbon in atomic mass units (amu)
+
+# ---------- Interatomic Potential ---------------------
+pair_style tersoff        
+pair_coeff * * BNC.tersoff C
+
+# ---------- Define Settings ---------------------
+compute eng all pe/atom 
+compute eatoms all reduce sum c_eng
+
+write_data nanoribbons.data
+
+# ---------- Run Minimization ---------------------
+reset_timestep 0
+# Relax atoms without changing box size
+min_style cg
+minimize 1e-25 1e-25 5000 10000  # Minimization for relaxation
+
+fix 1 all nve  # No external forces
+run 500  # Let atoms relax dynamically
+
+# ---------- Results ---------------------
+variable natoms equal "count(all)"
+variable teng equal "c_eatoms"
+variable length equal "lx"
+variable ecoh equal "v_teng/v_natoms"
+
+print "Total energy (eV) = ${teng};"
+print "Number of atoms = ${natoms};"
+print "Lattice constant (Angstroms) = ${length};"
+print "Cohesive energy (eV) = ${ecoh};"
+
+print "All done!"
+
+# Output atomic data in a format compatible with OVITO
+dump 1 all custom 100 nanoribbons_output.lammpstrj id type x y z
+dump_modify 1 sort id  # Ensures atoms are sorted by ID for easier visualization
+
+# Run the simulation 
+run 100
+
+
+#lmp_serial < in.nanoribbons > output_nanoribbons.txt
+#lmp_serial < in.nanoribbons
+
