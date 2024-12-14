@@ -1,0 +1,81 @@
+LAMMPS (2 Aug 2023 - Update 3)
+OMP_NUM_THREADS environment is not set. Defaulting to 1 thread. (src/comm.cpp:98)
+  using 1 OpenMP thread(s) per MPI task
+# This input file generated to avoid misunderstanding. This file is for after POSCAR files created to read them.
+
+# ---------- Initialize Simulation ---------------------
+units metal
+dimension 3
+boundary p p p
+atom_style atomic
+
+# ---------- Read the Supercell Data ---------------------
+read_data POSCAR-001.data    # Don't forget to update POSCAR-002.data
+Reading data file ...
+  orthogonal box = (0 0 0) to (17.04 4.9190243 10)
+  1 by 1 by 1 MPI processor grid
+  reading atoms ...
+  32 atoms
+  read_data CPU = 0.002 seconds
+
+# ---------- Define Interatomic Potential ---------------------
+pair_style tersoff
+pair_coeff * * BNC.tersoff C
+Reading tersoff potential file BNC.tersoff with DATE: 2013-03-21
+
+# ---------- Set Atomic Mass ---------------------
+mass 1 12.011  # Atomic mass of carbon for type 1
+
+# ---------- Compute Forces ---------------------
+compute myforces all property/atom fx fy fz
+dump 1 all custom 1 forces_POSCAR-001.dump id type x y z fx fy fz  # Don't forget to update POSCAR-002.data
+
+# ---------- Run the Simulation ---------------------
+run 0
+WARNING: No fixes with time integration, atoms won't move (src/verlet.cpp:60)
+Neighbor list info ...
+  update: every = 1 steps, delay = 0 steps, check = yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 4.1
+  ghost atom cutoff = 4.1
+  binsize = 2.05, bins = 9 3 5
+  1 neighbor lists, perpetual/occasional/extra = 1 0 0
+  (1) pair tersoff, perpetual
+      attributes: full, newton on
+      pair build: full/bin/atomonly
+      stencil: full/bin/3d
+      bin: standard
+Per MPI rank memory allocation (min/avg/max) = 3.062 | 3.062 | 3.062 Mbytes
+   Step          Temp          E_pair         E_mol          TotEng         Press     
+         0   0             -254.92287      0             -254.92287      35324.527    
+Loop time of 5.42e-07 on 1 procs for 0 steps with 32 atoms
+
+0.0% CPU use with 1 MPI tasks x 1 OpenMP threads
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0          | 0          | 0          |   0.0 |  0.00
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0          | 0          | 0          |   0.0 |  0.00
+Output  | 0          | 0          | 0          |   0.0 |  0.00
+Modify  | 0          | 0          | 0          |   0.0 |  0.00
+Other   |            | 5.42e-07   |            |       |100.00
+
+Nlocal:             32 ave          32 max          32 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+Nghost:            222 ave         222 max         222 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+Neighs:              0 ave           0 max           0 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+FullNghs:          576 ave         576 max         576 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+
+Total # of neighbors = 576
+Ave neighs/atom = 18
+Neighbor list builds = 0
+Dangerous builds = 0
+
+# Run: lmp_mpi -in in.graphene.read
+# phonopy --lammps -f forces_POSCAR-*.dump # for making FORCE_SETS
+Total wall time: 0:00:00
