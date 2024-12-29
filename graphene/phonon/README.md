@@ -1,3 +1,5 @@
+To visualize the phonon dispersion relation, all necessary files must be prepared. The results can be obtained directly by executing `dispersion.py`. Alternatively, the files can be generated manually by following the procedure described below.
+
 I initially constructed a unit cell for graphene to facilitate the calculations.
 The structure was subsequently verified using OVITO for accuracy. The phonon dispersion
 relation for graphene, comprising four basis atoms, was calculated incrementally utilizing

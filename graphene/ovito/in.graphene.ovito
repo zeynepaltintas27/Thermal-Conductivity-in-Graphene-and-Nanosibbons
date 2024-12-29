@@ -6,7 +6,7 @@ atom_style atomic
 
 # ---------- Create Atoms ---------------------
 variable a equal 1.42
-variable z_spacing equal 120.0
+variable z_spacing equal 10.0
 variable a1x equal 3.0*${a}       
 variable a2y equal sqrt(3)*${a}   
 
@@ -62,4 +62,4 @@ dump_modify 1 sort id  # Ensures atoms are sorted by ID for easier visualization
 # Run the simulation 
 run 100
 
-#lmp -in in.graphene.ovito 
+#lmp_serial -in in.graphene.ovito 

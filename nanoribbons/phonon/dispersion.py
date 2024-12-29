@@ -2,7 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 # Load band data from Phonopy
-data = np.loadtxt("band.dat")
+data = np.loadtxt("band.conf")
 
 # Extract x-coordinates and phonon frequencies
 x = data[:, 0]  # Reciprocal space

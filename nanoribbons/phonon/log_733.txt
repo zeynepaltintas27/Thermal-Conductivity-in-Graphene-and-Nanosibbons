@@ -1,0 +1,58 @@
+[107b.wls.metu.edu.tr:14705] shmem: mmap: an error occurred while determining whether or not /var/folders/66/9m17tvm541bbkq0897qb96th0000gn/T//ompi.107b.501/jf.0/867237888/sm_segment.107b.501.33b10000.0 could be created.
+LAMMPS (2 Aug 2023 - Update 3)
+  using 4 OpenMP thread(s) per MPI task
+Reading data file ...
+  orthogonal box = (0 0 0) to (25.56 340.8 2.84)
+  1 by 1 by 1 MPI processor grid
+  reading atoms ...
+  1260 atoms
+  read_data CPU = 0.003 seconds
+Reading tersoff potential file BNC.tersoff with DATE: 2013-03-21
+WARNING: No fixes with time integration, atoms won't move (src/verlet.cpp:60)
+Neighbor list info ...
+  update: every = 1 steps, delay = 0 steps, check = yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 4.1
+  ghost atom cutoff = 4.1
+  binsize = 2.05, bins = 13 167 2
+  1 neighbor lists, perpetual/occasional/extra = 1 0 0
+  (1) pair tersoff, perpetual
+      attributes: full, newton on
+      pair build: full/bin/atomonly
+      stencil: full/bin/3d
+      bin: standard
+Setting up Verlet run ...
+  Unit style    : metal
+  Current step  : 0
+  Time step     : 0.001
+Per MPI rank memory allocation (min/avg/max) = 5.998 | 5.998 | 5.998 Mbytes
+   Step          Temp          E_pair         E_mol          TotEng         Press     
+         0   0             -8387.2526      0             -8387.2526      90925.383    
+Loop time of 6.25e-07 on 4 procs for 0 steps with 1260 atoms
+
+160.0% CPU use with 1 MPI tasks x 4 OpenMP threads
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 0          | 0          | 0          |   0.0 |  0.00
+Neigh   | 0          | 0          | 0          |   0.0 |  0.00
+Comm    | 0          | 0          | 0          |   0.0 |  0.00
+Output  | 0          | 0          | 0          |   0.0 |  0.00
+Modify  | 0          | 0          | 0          |   0.0 |  0.00
+Other   |            | 6.25e-07   |            |       |100.00
+
+Nlocal:           1260 ave        1260 max        1260 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+Nghost:           3904 ave        3904 max        3904 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+Neighs:              0 ave           0 max           0 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+FullNghs:        46970 ave       46970 max       46970 min
+Histogram: 1 0 0 0 0 0 0 0 0 0
+
+Total # of neighbors = 46970
+Ave neighs/atom = 37.277778
+Neighbor list builds = 0
+Dangerous builds = 0
+Total wall time: 0:00:00

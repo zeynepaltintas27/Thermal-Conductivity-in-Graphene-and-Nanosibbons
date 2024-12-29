@@ -1,114 +1,75 @@
 LAMMPS (2 Aug 2023 - Update 3)
-OMP_NUM_THREADS environment is not set. Defaulting to 1 thread. (src/comm.cpp:98)
-  using 1 OpenMP thread(s) per MPI task
+  using 4 OpenMP thread(s) per MPI task
 # ---------- Initialize Simulation ---------------------
 units metal
 dimension 3
-boundary p f p
+boundary p p p
 atom_style atomic
 
-# ---------- Create Atoms ---------------------
-variable a equal 1.42
-variable z_spacing equal 10.0
-variable a1x equal 3.0*${a}
-variable a1x equal 3.0*1.42
-variable a2y equal sqrt(3)*${a}
-variable a2y equal sqrt(3)*1.42
-
-lattice custom 1.0     a1 ${a1x} 0.0 0.0     a2 0.0 ${a2y} 0.0     a3 0.0 0.0 ${z_spacing}     basis 0.0 0.0 0.0     basis 0.3333 0.0 0.0     basis 0.5 0.5 0.0     basis 0.8333 0.5 0.0
-lattice custom 1.0     a1 4.26 0.0 0.0     a2 0.0 ${a2y} 0.0     a3 0.0 0.0 ${z_spacing}     basis 0.0 0.0 0.0     basis 0.3333 0.0 0.0     basis 0.5 0.5 0.0     basis 0.8333 0.5 0.0
-lattice custom 1.0     a1 4.26 0.0 0.0     a2 0.0 2.45951214674781 0.0     a3 0.0 0.0 ${z_spacing}     basis 0.0 0.0 0.0     basis 0.3333 0.0 0.0     basis 0.5 0.5 0.0     basis 0.8333 0.5 0.0
-lattice custom 1.0     a1 4.26 0.0 0.0     a2 0.0 2.45951214674781 0.0     a3 0.0 0.0 10     basis 0.0 0.0 0.0     basis 0.3333 0.0 0.0     basis 0.5 0.5 0.0     basis 0.8333 0.5 0.0
-Lattice spacing in x,y,z = 4.26 2.4595121 10
-
-# Define a larger region with an extended z dimension
-region nanoribbons_box block 0 3 0 30 0 1 units lattice
-
-create_box 1 nanoribbons_box
-Created orthogonal box = (0 0 0) to (12.78 73.785364 10)
+# ---------- Read the Supercell Data ---------------------
+read_data POSCAR-1008.data
+Reading data file ...
+  orthogonal box = (0 0 0) to (25.56 340.8 2.84)
   1 by 1 by 1 MPI processor grid
-create_atoms 1 region nanoribbons_box
-Created 360 atoms
-  using lattice units in orthogonal box = (0 0 0) to (12.78 73.785364 10)
-  create_atoms CPU = 0.000 seconds
+  reading atoms ...
+  1260 atoms
+  read_data CPU = 0.005 seconds
 
-dump 1 all custom 100 nanoribbons_forces_*.lammpstrj id type fx fy fz
-
-mass 1 12.011  # Mass of carbon in atomic mass units (amu)
-
-# ---------- Interatomic Potential ---------------------
+# ---------- Define Interatomic Potential ---------------------
 pair_style tersoff
 pair_coeff * * BNC.tersoff C
 Reading tersoff potential file BNC.tersoff with DATE: 2013-03-21
 
-# ---------- Define Settings ---------------------
-compute eng all pe/atom
-compute eatoms all reduce sum c_eng
+# ---------- Set Atomic Mass ---------------------
+mass 1 12.011  # Atomic mass of carbon for type 1
 
-write_data nanoribbons.data
-System init for write_data ...
+# ---------- Compute Forces ---------------------
+compute myforces all property/atom fx fy fz
+dump 1 all custom 1 forces_POSCAR-1008.dump id type x y z fx fy fz
+
+# ---------- Run the Simulation ---------------------
+run 0
+WARNING: No fixes with time integration, atoms won't move (src/verlet.cpp:60)
 Neighbor list info ...
   update: every = 1 steps, delay = 0 steps, check = yes
   max neighbors/atom: 2000, page size: 100000
   master list distance cutoff = 4.1
   ghost atom cutoff = 4.1
-  binsize = 2.05, bins = 7 36 5
+  binsize = 2.05, bins = 13 167 2
   1 neighbor lists, perpetual/occasional/extra = 1 0 0
   (1) pair tersoff, perpetual
       attributes: full, newton on
       pair build: full/bin/atomonly
       stencil: full/bin/3d
       bin: standard
-
-# ---------- Run Minimization ---------------------
-reset_timestep 0
-# Relax atoms without changing box size
-min_style cg
-minimize 1e-25 1e-25 5000 10000  # Minimization for relaxation
-Per MPI rank memory allocation (min/avg/max) = 4.389 | 4.389 | 4.389 Mbytes
+Per MPI rank memory allocation (min/avg/max) = 5.998 | 5.998 | 5.998 Mbytes
    Step          Temp          E_pair         E_mol          TotEng         Press     
-         0   0             -2850.0126      0             -2850.0126      32441.472    
-       145   0             -2857.539       0             -2857.539       20596.54     
-Loop time of 0.0779119 on 1 procs for 145 steps with 360 atoms
+         0   0             -8387.3371      0             -8387.3371      90916.552    
+Loop time of 7.09e-07 on 4 procs for 0 steps with 1260 atoms
 
-98.4% CPU use with 1 MPI tasks x 1 OpenMP threads
-
-Minimization stats:
-  Stopping criterion = energy tolerance
-  Energy initial, next-to-last, final = 
-     -2850.01255915273  -2857.53897414412  -2857.53897414412
-  Force two-norm initial, final = 23.903094 2.0206844e-05
-  Force max component initial, final = 4.9515299 3.073256e-06
-  Final line search alpha, max atom move = 1 3.073256e-06
-  Iterations, force evaluations = 145 290
+282.1% CPU use with 1 MPI tasks x 4 OpenMP threads
 
 MPI task timing breakdown:
 Section |  min time  |  avg time  |  max time  |%varavg| %total
 ---------------------------------------------------------------
-Pair    | 0.074175   | 0.074175   | 0.074175   |   0.0 | 95.20
+Pair    | 0          | 0          | 0          |   0.0 |  0.00
 Neigh   | 0          | 0          | 0          |   0.0 |  0.00
-Comm    | 0.00058625 | 0.00058625 | 0.00058625 |   0.0 |  0.75
-Output  | 0.00076837 | 0.00076837 | 0.00076837 |   0.0 |  0.99
+Comm    | 0          | 0          | 0          |   0.0 |  0.00
+Output  | 0          | 0          | 0          |   0.0 |  0.00
 Modify  | 0          | 0          | 0          |   0.0 |  0.00
-Other   |            | 0.002382   |            |       |  3.06
+Other   |            | 7.09e-07   |            |       |100.00
 
-Nlocal:            360 ave         360 max         360 min
+Nlocal:           1260 ave        1260 max        1260 min
 Histogram: 1 0 0 0 0 0 0 0 0 0
-Nghost:            780 ave         780 max         780 min
+Nghost:           3904 ave        3904 max        3904 min
 Histogram: 1 0 0 0 0 0 0 0 0 0
 Neighs:              0 ave           0 max           0 min
 Histogram: 1 0 0 0 0 0 0 0 0 0
-FullNghs:         6324 ave        6324 max        6324 min
+FullNghs:        46970 ave       46970 max       46970 min
 Histogram: 1 0 0 0 0 0 0 0 0 0
 
-Total # of neighbors = 6324
-Ave neighs/atom = 17.566667
+Total # of neighbors = 46970
+Ave neighs/atom = 37.277778
 Neighbor list builds = 0
 Dangerous builds = 0
-
-fix 1 all nve  # No external forces
-run 500  # Let atoms relax dynamically
-Per MPI rank memory allocation (min/avg/max) = 4.527 | 4.527 | 4.527 Mbytes
-   Step          Temp          E_pair         E_mol          TotEng         Press     
-ERROR: Lost atoms: original 360 current 354 (src/thermo.cpp:488)
-Last command: run 500  # Let atoms relax dynamically
+Total wall time: 0:00:00
