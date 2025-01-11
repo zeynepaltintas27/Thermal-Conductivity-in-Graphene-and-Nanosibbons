@@ -1,0 +1,22 @@
+# ---------- Initialize Simulation ---------------------
+units metal
+dimension 3
+boundary p p p
+atom_style atomic
+
+# ---------- Read Displaced Supercell ------------------
+read_data POSCAR-001.data # Replace with each supercell file (e.g., supercell-001, supercell-002, etc.)
+
+# ---------- Define Interatomic Potential --------------
+pair_style tersoff
+pair_coeff * * BNC.tersoff C  # Specify the correct Tersoff potential file for carbon atoms
+
+# ---------- Define Mass -------------------------------
+mass 1 12.011  # Mass of carbon in atomic mass units (amu)
+
+# ---------- Force Calculation -------------------------
+dump forces all custom 1 forces.POSCAR-001.dump id type fx fy fz
+  # Output forces for each atom
+run 0  # Static calculation to compute forces without performing any dynamics
+
+#lmp_mpi -in in.nanoribbons.read

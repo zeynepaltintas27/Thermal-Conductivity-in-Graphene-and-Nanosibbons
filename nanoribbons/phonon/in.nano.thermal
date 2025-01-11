@@ -1,0 +1,40 @@
+# Initialize Simulation
+units metal
+dimension 3
+boundary p p p
+atom_style atomic
+
+# Read Supercell Data
+read_data POSCAR-001.data  # Replace with your supercell data file
+
+# Define Interatomic Potential
+pair_style tersoff
+pair_coeff * * BNC.tersoff C
+
+# Set Atomic Mass
+mass 1 12.011  # Atomic mass for carbon (adjust for other elements if necessary)
+
+# Simulation Settings
+timestep 0.001  # Set timestep size
+thermo 100      # Output thermodynamic data every 100 steps
+reset_timestep 0
+
+# Compute Heat Flux
+compute myKE all ke/atom
+compute myPE all pe/atom
+compute myStress all stress/atom NULL virial
+compute flux all heat/flux myKE myPE myStress
+
+# Define Heat Flux Variables (Normalized by Volume)
+variable Jx equal c_flux[1]/vol
+variable Jy equal c_flux[2]/vol
+variable Jz equal c_flux[3]/vol
+
+# Fix for Heat Flux Autocorrelation
+fix JJ all ave/correlate 100 5000 500000 c_flux[1] c_flux[2] c_flux[3] type auto file J0Jt.dat ave running
+
+# Thermostat for Equilibration
+fix NVT all nvt temp 300.0 300.0 0.1  # Equilibrate at 300K
+
+# Run Simulation
+run 500000  # Run for 500,000 timesteps (adjust as needed)

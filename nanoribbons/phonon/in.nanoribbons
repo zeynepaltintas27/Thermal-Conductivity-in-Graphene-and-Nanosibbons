@@ -6,7 +6,7 @@ atom_style atomic
 
 # ---------- Create Atoms ---------------------
 variable a equal 1.42
-variable z_spacing equal 10.0
+variable z_spacing equal 30.0
 variable a1x equal 3.0*${a}
 variable a2y equal sqrt(3)*${a}
 
@@ -22,14 +22,14 @@ lattice custom 1.0 &
 
 # Number of cell in 3D
 variable Nx equal 6
-variable Ny equal 48
-variable Nz equal 2
+variable Ny equal 2
+variable Nz equal 20
 
 # Simulation cell size in 3D. Lxs is represents the position at which atoms start to align and Lxf is represents the position at which atoms finish to align 
-variable Lxs equal ${a}*${Nx}
-variable Lxf equal 2*${a}*${Nx}
-variable Lx equal  3*${a}*${Nx}
-variable Ly equal  ${a}*${Ny}
+variable Lxs equal ${a1x}*${Nx}
+variable Lxf equal 2*${a1x}*${Nx}
+variable Lx equal  3*${a1x}*${Nx}
+variable Ly equal  ${a2y}*${Ny}
 variable Lz equal  ${a}*${Nz}
 
 ## Simulation region
@@ -41,8 +41,8 @@ region surface block ${Lxs} ${Lxf} 0 ${Ly} 0 ${Lz} units box
 create_atoms 1 region surface 
 
 # Info
-thermo_style custom step temp etotal pe ke  
-thermo 100
+#thermo_style custom step temp etotal pe ke  
+#thermo 100
 
 # Mass of atoms
 mass 1 12.011  # Mass of carbon in atomic mass units (amu)
@@ -63,15 +63,12 @@ reset_timestep 0
 
 # Relax atoms in the "bottom" region
 min_style cg
-minimize 1e-25 1e-25 5000 10000
+minimize 1e-12 1e-6 1000 10000
 
-# ---------- Dump Files ---------------------
-dump 1 all custom 100 nanoribbons_output.lammpstrj id type x y z
-#dump 1 all custom 100 nanoribbons_forces_*.lammpstrj id type fx fy fz
-dump_modify 1 sort id
 
-# Optionally run dynamics to generate dump files at intervals
-# run 100 optional for nanoribbons_output.lammpstrj for ovito.
+# ---------- Dump Atom Positions (Static) ---------------------
+run 0
+write_dump all custom nanoribbons_output.lammpstrj id type x y z
 
 #lmp_serial < in.nanoribbons > output_nanoribbons.txt
-#lmp_serial < in.nanoribbons
+#lmp_mpi -in in.nanoribbons
