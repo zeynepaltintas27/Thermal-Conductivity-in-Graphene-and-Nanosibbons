@@ -1,2 +1,2 @@
-In this project, the thermal conductivities of graphene, nano ribbons, and nanotubes are analyzed. The Ovito folder contains files intended solely for visualization purposes. The phonon folders holds files related to computation of phonon dispersion relations.
+In this project, the thermal conductivities of graphene and nano ribbons are analyzed. The Ovito folder contains files intended solely for visualization purposes. The phonon folders holds files related to computation of phonon dispersion relations.
 You can find detail information and procedure in the READ.me files on phonon folders.
